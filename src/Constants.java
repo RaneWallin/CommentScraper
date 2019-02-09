@@ -6,6 +6,11 @@ public interface Constants {
     public static final int MAIN_GUI_SPACING = 25;
 
 
-    public static final String GUI_TITLE = "Comment Scraper";
+    public static final String GUI_TITLE = "CScrape: Comment Scraper";
     public static final String START_BUTTON_TXT = "Start";
+    public static final String DEFAULT_FONT = "Arial";
+    public static final String INPUT_INSTRUCTIONS = "Enter filename";
+    public static final String CHOOSER_BUTTON_TXT = "Find";
+    public static final String BLANK_ROW = "";
+    public static final String BLANK_COLUMN = BLANK_ROW;
 }
