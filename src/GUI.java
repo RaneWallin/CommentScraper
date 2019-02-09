@@ -1,6 +1,6 @@
 /*
 *
-* This is all setting up the GUI and adding listeners. No assignment logic here.
+* This is all setting up the GUI. No assignment logic here.
 *
 * References:
 * GridPane layout: https://docs.oracle.com/javase/8/javafx/layout-tutorial/builtin_layouts.htm#JFXLY102
@@ -155,6 +155,30 @@ public class GUI implements Constants {
         grid.setHgap(5);
         grid.setVgap(5);
         grid.setPadding(new Insets(0, 10, 0, 10));
+    }
+
+
+    // getters
+
+    public Button getChooserButton() {
+        return chooserButton;
+    }
+
+    public Button getInputButton() {
+        return inputButton;
+    }
+
+    public Button getOpenButton() {
+        return openButton;
+    }
+
+    public Label getOutputTextArea() {
+        return outputTextArea;
+    }
+
+    // setters
+    public void setOutputTextAreaText(String string) {
+        this.outputTextArea.setText(string);
     }
 }
 
