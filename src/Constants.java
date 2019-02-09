@@ -7,6 +7,7 @@ public interface Constants {
     String GUI_TITLE = "CScrape: Comment Scraper";
     String INPUT_INSTRUCTIONS = "Enter filename";
     String OUTPUT_COMPLETE_TXT = "Your new file has been created.  \nClick \"Open\" to view it.";
+    String ERROR = "Something went wrong: ";
 
     // Button text
     String START_BUTTON_TXT = "Start";
@@ -22,6 +23,15 @@ public interface Constants {
     String DEFAULT_FONT = "Arial";
     String BLANK_ROW = "";
     String BLANK_COLUMN = BLANK_ROW;
+
+    // RegEx patterns
+    String COMMENT_STARTS = "//|/\\*";
+    String TRADITIONAL_START = "//\\*";
+    String TRADITIONAL_END = "\\*//";
+    String EOL_RANGE = "//.$";
+    String TRADITIONAL_RANGE = "/\\*.\\*//";
+    String TRADITIONAL_TO_EOL = "/\\*.$";
+    String SOL_TO_TRADITIONAL_END = "^.\\*/";
 
     String LOREM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 }

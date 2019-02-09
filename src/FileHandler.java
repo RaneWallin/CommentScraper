@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import java.io.File;
 
 public class FileHandler implements Constants {
+
     private static GUI gui;
 
     public FileHandler(GUI gui) {
@@ -18,6 +19,7 @@ public class FileHandler implements Constants {
         setListeners();
     }
 
+    // Add event listeners to buttons
     private void setListeners() {
 
         // create event handlers
