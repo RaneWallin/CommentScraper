@@ -22,26 +22,36 @@ public abstract class Scraper implements Constants {
         for(String line: input) {
 
             if (multilineComment) {
+
                 // Check if matches a multiline end
                 if(hasMatch(TRADITIONAL_END, line)) {
+
                     multilineComment = false;
 
                     // Add comment from start of line to ending comment
                     outputString += getOutput(getComment(SOL_TO_TRADITIONAL_END, line), counter);
+
                 } else {
+
                     // Add comment from /* to end of line
                     outputString += getOutput(line, counter);
+
                 }
+
             } else  {
+
                 // Check if matches any type of comment
                 if (hasMatch(COMMENT_STARTS, line)) {
+
                     // check if match is /*
                     if (hasMatch(TRADITIONAL_START, line)) {
+
                         // check if using multiline syntax on single line
                         if (hasMatch(TRADITIONAL_END, line)) {
 
                             // Add comment from /* to */
                             outputString += getOutput(getComment(TRADITIONAL_RANGE, line), counter);
+
                         }
                         else {
                             multilineComment = true;
@@ -51,6 +61,7 @@ public abstract class Scraper implements Constants {
                         }
 
                     } else {
+
                         // Add end of line comment from start of comment
                         outputString += getOutput(getComment(EOL_RANGE, line), counter);
                     }
