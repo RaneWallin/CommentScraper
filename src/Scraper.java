@@ -5,32 +5,28 @@
  * RegEx: https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html
  */
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Scraper implements Constants {
-    private File file;
-    private GUI gui;
+public abstract class Scraper implements Constants {
+//    private File file;
+//    private GUI gui;
+//
+//    public Scraper(File file, GUI gui){
+//        this.file = file;
+//        this.gui = gui;
+//    }
 
-    public Scraper(File file, GUI gui){
-        this.file = file;
-        this.gui = gui;
-    }
+    public static String scrapeComments(List<String> input) {
 
-    public String scrapeComments() {
-        List<String> input = openFile();
-        Boolean multilineComment = false;
+        boolean multilineComment = false;
         String outputString = "";
         int counter = 1;
 
+        // Check each line for pattern matches
         for(String line: input) {
+            System.out.println(line);
             if (multilineComment) {
                 // Check if matches a multiline end
                 if(hasMatch(TRADITIONAL_END, line)) {
@@ -43,6 +39,7 @@ public class Scraper implements Constants {
             } else  {
                 // Check if matches any type of comment
                 if (hasMatch(COMMENT_STARTS, line)) {
+                    System.out.println("Comment found " + line);
                     // check if match is /*
                     if (hasMatch(TRADITIONAL_START, line)) {
                         // check if using multiline syntax on single line
@@ -69,35 +66,25 @@ public class Scraper implements Constants {
         return outputString;
     }
 
-    private boolean hasMatch(String patternString, String checkString) {
-        Pattern pattern = Pattern.compile(patternString);
-        Matcher matcher = pattern.matcher(checkString);
+    // Searches for a match based on a provided pattern and string to check
+    private static boolean hasMatch(String patternString, String checkString) {
 
-        return matcher.matches();
+        return checkString.matches(patternString);
 
     }
 
-    private String getComment(String patternString,String checkString) {
+    // Returns the string that matches the given pattern
+    private static String getComment(String patternString,String checkString) {
         Pattern pattern = Pattern.compile(patternString);
         Matcher matcher = pattern.matcher(checkString);
+        matcher.matches();
 
-        return matcher.toString();
+        return matcher.group(1);
     }
 
-    private String getOutput(String text, int lineNum) {
+    // Formats output to print to a file
+    private static String getOutput(String text, int lineNum) {
         return lineNum + ". " + text;
     }
 
-    public List<String> openFile() {
-        List<String> fileInput = new ArrayList<>();
-
-        try {
-            Path input = Paths.get(file.getPath());
-            fileInput = Files.readAllLines(input);
-        } catch(IOException e) {
-            System.out.println(ERROR + e.getMessage());
-        }
-
-        return fileInput;
-    }
 }

@@ -27,6 +27,7 @@ public class GUI implements Constants {
     private Button inputButton;
     private Button chooserButton;
     private Label outputTextArea;
+    private TextField inputField;
 
     public GUI(Stage stage) {
         initUI(stage);
@@ -80,7 +81,7 @@ public class GUI implements Constants {
     private void addInputArea(GridPane grid) {
         // Create input area components
         Text inputInstructions = new Text(INPUT_INSTRUCTIONS);
-        TextField inputField = new TextField();
+        inputField = new TextField();
         inputButton = new Button(START_BUTTON_TXT);
         chooserButton = new Button(CHOOSER_BUTTON_TXT);
 
@@ -99,7 +100,7 @@ public class GUI implements Constants {
     // Add output elements
     private void addOutputArea(GridPane grid) {
         // Create output components
-        this.outputTextArea = new Label(LOREM);
+        this.outputTextArea = new Label();
         openButton = new Button(OPEN_BUTTON_TXT);
         Label outputCompleteText = new Label(OUTPUT_COMPLETE_TXT);
         AnchorPane outputArea= new AnchorPane(outputTextArea, openButton, outputCompleteText);
@@ -174,6 +175,10 @@ public class GUI implements Constants {
 
     public Label getOutputTextArea() {
         return outputTextArea;
+    }
+
+    public String getInputTextFieldText() {
+        return inputField.getText();
     }
 
     // setters

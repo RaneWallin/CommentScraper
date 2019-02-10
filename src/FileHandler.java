@@ -8,6 +8,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FileHandler implements Constants {
 
@@ -51,10 +57,15 @@ public class FileHandler implements Constants {
     }
 
     private void getInputFile() {
-        System.out.println("input file (not provided) click");
+        String filename = gui.getInputTextFieldText();
+        List fileInput = openFile(new File(filename));
+        String comments = Scraper.scrapeComments(fileInput);
+
+        System.out.println(comments);
     }
 
     private void getInputFile(File file) {
+        //String filename =
         System.out.println("input (from chooser) click");
     }
 
@@ -68,5 +79,20 @@ public class FileHandler implements Constants {
 
     private void openOutputFile() {
         System.out.println("open output file");
+    }
+
+    // Opens a provided file and reads lines into an ArrayList
+    public List<String> openFile(File file) {
+        List<String> fileInput = new ArrayList<>();
+
+        try {
+            Path input = Paths.get(file.getPath());
+            //System.out.println(input);
+            fileInput = Files.readAllLines(input);
+        } catch(IOException e) {
+            gui.setOutputTextAreaText(ERROR + e.getMessage());
+        }
+
+        return fileInput;
     }
 }

@@ -16,7 +16,7 @@ public class CScrape extends Application implements Constants {
         try {
             launch(args);
         } catch (Exception e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+            System.out.println(ERROR + e.getMessage());
         }
     }
 
