@@ -1,6 +1,7 @@
 /*
  * Resources:
- * https://www.tutorialspoint.com/javafx/javafx_event_handling.htm
+ * Event handling: https://www.tutorialspoint.com/javafx/javafx_event_handling.htm
+ * Catching multiple exceptions: https://docs.oracle.com/javase/7/docs/technotes/guides/language/catch-multiple.html
  */
 
 import javafx.scene.control.Button;
@@ -8,8 +9,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -89,8 +92,13 @@ public class FileHandler implements Constants {
             Path input = Paths.get(file.getPath());
             //System.out.println(input);
             fileInput = Files.readAllLines(input);
-        } catch(IOException e) {
-            gui.setOutputTextAreaText(ERROR + e.getMessage());
+        }
+        catch (NoSuchFileException|FileNotFoundException e) {
+            gui.setOutputTextAreaText(FILE_NOT_FOUND);
+        }
+        catch(IOException e) {
+            gui.setOutputTextAreaText(ERROR + e.toString());
+            e.printStackTrace();
         }
 
         return fileInput;

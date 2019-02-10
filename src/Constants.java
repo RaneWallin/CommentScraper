@@ -8,6 +8,7 @@ public interface Constants {
     String INPUT_INSTRUCTIONS = "Enter filename";
     String OUTPUT_COMPLETE_TXT = "Your new file has been created.  \nClick \"Open\" to view it.";
     String ERROR = "Something went wrong: ";
+    String FILE_NOT_FOUND = "That file doesn't exist. \nPlease enter a new file name.";
 
     // Button text
     String START_BUTTON_TXT = "Start";

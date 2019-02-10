@@ -3,6 +3,7 @@
  *
  * Resources
  * RegEx: https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html
+ *
  */
 
 import java.util.List;
@@ -10,13 +11,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public abstract class Scraper implements Constants {
-//    private File file;
-//    private GUI gui;
-//
-//    public Scraper(File file, GUI gui){
-//        this.file = file;
-//        this.gui = gui;
-//    }
 
     public static String scrapeComments(List<String> input) {
 
@@ -26,14 +20,16 @@ public abstract class Scraper implements Constants {
 
         // Check each line for pattern matches
         for(String line: input) {
-            System.out.println(line);
+
             if (multilineComment) {
                 // Check if matches a multiline end
                 if(hasMatch(TRADITIONAL_END, line)) {
                     multilineComment = false;
+
                     // Add comment from start of line to ending comment
                     outputString += getOutput(getComment(SOL_TO_TRADITIONAL_END, line), counter);
                 } else {
+                    // Add comment from /* to end of line
                     outputString += getOutput(getComment(TRADITIONAL_TO_EOL, line), counter);
                 }
             } else  {
