@@ -2,3 +2,10 @@ test
 one
 two
 three // test comment
+four /* test comment 2 */
+five
+/*
+comment
+comment
+comment
+*/

@@ -90,7 +90,7 @@ public class FileHandler implements Constants {
 
         try {
             Path input = Paths.get(file.getPath());
-            //System.out.println(input);
+
             fileInput = Files.readAllLines(input);
         }
         catch (NoSuchFileException|FileNotFoundException e) {

@@ -9,6 +9,7 @@ public interface Constants {
     String OUTPUT_COMPLETE_TXT = "Your new file has been created.  \nClick \"Open\" to view it.";
     String ERROR = "Something went wrong: ";
     String FILE_NOT_FOUND = "That file doesn't exist. \nPlease enter a new file name.";
+    String NO_MATCHES = "";
 
     // Button text
     String START_BUTTON_TXT = "Start";
@@ -26,13 +27,13 @@ public interface Constants {
     String BLANK_COLUMN = BLANK_ROW;
 
     // RegEx patterns
-    String COMMENT_STARTS = ".*//|/\\*.*";
-    String TRADITIONAL_START = "//\\*.*";
-    String TRADITIONAL_END = "(.*\\*/).*";
+    String COMMENT_STARTS = ".*(//|/\\*).*";
+    String TRADITIONAL_START = ".*(/\\*).*";
+    String TRADITIONAL_END = ".*(\\*/).*";
     String EOL_RANGE = ".*(//.*)";
-    String TRADITIONAL_RANGE = ".*(/\\*.\\*/).*";
-    String TRADITIONAL_TO_EOL = "(/\\*.*)";
-    String SOL_TO_TRADITIONAL_END = "(^.\\*/).*";
+    String TRADITIONAL_RANGE = ".*(/\\*.*\\*/).*";
+    String TRADITIONAL_TO_EOL = ".*(/\\*.*)";
+    String SOL_TO_TRADITIONAL_END = "(^.*\\*/).*";
 
     String LOREM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 }

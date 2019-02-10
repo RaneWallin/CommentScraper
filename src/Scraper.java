@@ -30,28 +30,29 @@ public abstract class Scraper implements Constants {
                     outputString += getOutput(getComment(SOL_TO_TRADITIONAL_END, line), counter);
                 } else {
                     // Add comment from /* to end of line
-                    outputString += getOutput(getComment(TRADITIONAL_TO_EOL, line), counter);
+                    outputString += getOutput(line, counter);
                 }
             } else  {
                 // Check if matches any type of comment
                 if (hasMatch(COMMENT_STARTS, line)) {
-                    System.out.println("Comment found " + line);
                     // check if match is /*
                     if (hasMatch(TRADITIONAL_START, line)) {
                         // check if using multiline syntax on single line
                         if (hasMatch(TRADITIONAL_END, line)) {
 
                             // Add comment from /* to */
-                            outputString = getOutput(getComment(TRADITIONAL_RANGE, line), counter);
+                            outputString += getOutput(getComment(TRADITIONAL_RANGE, line), counter);
                         }
-                        else multilineComment = true;
+                        else {
+                            multilineComment = true;
 
-                        // Add comment from /* to end of line
-                        outputString = getOutput(getComment(TRADITIONAL_TO_EOL, line), counter);
+                            // Add comment from /* to end of line
+                            outputString += getOutput(getComment(TRADITIONAL_TO_EOL, line), counter);
+                        }
 
                     } else {
                         // Add end of line comment from start of comment
-                        outputString = getOutput(getComment(EOL_RANGE, line), counter);
+                        outputString += getOutput(getComment(EOL_RANGE, line), counter);
                     }
                 }
             }
@@ -71,16 +72,21 @@ public abstract class Scraper implements Constants {
 
     // Returns the string that matches the given pattern
     private static String getComment(String patternString,String checkString) {
+        // create the pattern for matching
         Pattern pattern = Pattern.compile(patternString);
-        Matcher matcher = pattern.matcher(checkString);
-        matcher.matches();
 
-        return matcher.group(1);
+        // get matches (should be one match)
+        Matcher matcher = pattern.matcher(checkString);
+
+        // This method is only called when a match is found, so this should always return
+        // the group containing the match (second group, since first is the whole
+        // string
+        return matcher.matches() ? matcher.group(1) : NO_MATCHES;
     }
 
     // Formats output to print to a file
     private static String getOutput(String text, int lineNum) {
-        return lineNum + ". " + text;
+        return lineNum + ". " + text + "\n";
     }
 
 }
