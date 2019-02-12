@@ -86,6 +86,8 @@ public class GUI implements Constants {
         inputField = new TextField();
         inputButton = new Button(START_BUTTON_TXT);
 
+        inputButton.setId(START_ID);
+
 
         // Add components to the grid
         grid.add(inputInstructions, 1, 3);
@@ -111,6 +113,7 @@ public class GUI implements Constants {
         outputArea.setMinHeight(150);
         outputTextArea.setWrapText(true);
         outputCompleteText.setWrapText(true);
+        openButton.setId(OPEN_ID);
 
         // Hide completion text and button
         openButton.setStyle(HIDDEN);
@@ -127,7 +130,7 @@ public class GUI implements Constants {
         AnchorPane.setLeftAnchor(openButton, 10.0);
 
         // Position outputCompleteText on AnchorPane
-        AnchorPane.setBottomAnchor(outputCompleteText, 30.0);
+        AnchorPane.setBottomAnchor(outputCompleteText, 20.0);
         AnchorPane.setLeftAnchor(outputCompleteText, 10.0);
 
         // Add outputArea to grid

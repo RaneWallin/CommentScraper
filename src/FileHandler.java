@@ -41,13 +41,13 @@ public class FileHandler implements Constants {
         EventHandler<MouseEvent> buttonClick = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
-                String buttonText = ((Button) e.getSource()).getText();
+                String buttonText = ((Button) e.getSource()).getId();
 
                 switch(buttonText) {
-                    case OPEN_BUTTON_TXT:
+                    case OPEN_ID:
                         openOutputFile();
                         break;
-                    case START_BUTTON_TXT:
+                    case START_ID:
                         getInputFile();
                         break;
                     default:
@@ -76,8 +76,8 @@ public class FileHandler implements Constants {
             Desktop.getDesktop().open(outputFile);
         } catch (FileNotFoundException|NoSuchFileException e) {
             gui.setOutputTextAreaText(FILE_NOT_FOUND);
-        } catch (IOException e) {
-            gui.setOutputTextAreaText(ERROR + e.toString());
+        } catch (Exception e) {
+            gui.setOutputTextAreaText(ERROR + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -131,6 +131,7 @@ public class FileHandler implements Constants {
 
             // Show open button
             gui.getOpenButton().setStyle(SHOWN);
+            gui.getOpenButton().setText(OPEN_BUTTON_TXT + outputFile);
         }
     }
 }

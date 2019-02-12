@@ -18,7 +18,7 @@ public interface Constants {
 
     // Button text
     String START_BUTTON_TXT = "Start";
-    String OPEN_BUTTON_TXT = "Open";
+    String OPEN_BUTTON_TXT = "Open ";
 
     // styles and formatting
     String GRAY_BG = "-fx-background-color: lightgray; ";
@@ -27,6 +27,8 @@ public interface Constants {
     String PADDING5PX = "-fx-padding: 5";
     String HIDDEN = "-fx-opacity: 0";
     String SHOWN = "-fx-opacity: 1";
+    String OPEN_ID = "open-button";
+    String START_ID = "start-button";
     String DEFAULT_FONT = "Arial";
     String UNICODE = "UTF-8";
     String OUTPUT_FORMAT = "%d. %s";
