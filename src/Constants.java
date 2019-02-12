@@ -23,6 +23,7 @@ public interface Constants {
     String BLACK_BORDER = "-fx-border-color: black; ";
     String PADDING5PX = "-fx-padding: 5";
     String HIDDEN = "-fx-opacity: 0";
+    String SHOWN = "-fx-opacity: 1";
     String DEFAULT_FONT = "Arial";
     String BLANK_ROW = "";
     String BLANK_COLUMN = BLANK_ROW;

@@ -105,7 +105,7 @@ public class GUI implements Constants {
 
         // Styles
         outputArea.setStyle(GRAY_BG + BLACK_BORDER + PADDING5PX);
-        outputArea.setMinHeight(300);
+        outputArea.setMinHeight(150);
         outputTextArea.setWrapText(true);
         outputCompleteText.setWrapText(true);
 

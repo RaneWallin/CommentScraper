@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -22,6 +23,7 @@ import java.util.List;
 public class FileHandler implements Constants {
 
     private static GUI gui;
+    private File outputFile;
 
     public FileHandler(GUI gui) {
         this.gui = gui;
@@ -66,21 +68,16 @@ public class FileHandler implements Constants {
 
     }
 
-    private void getInputFile(File file) {
-        //String filename =
-        System.out.println("input (from chooser) click");
-    }
-
-    private void chooseFile() {
-        System.out.println("Choose file");
-    }
-
-    private void getOutputFile() {
-        System.out.println("get output file");
-    }
 
     private void openOutputFile() {
-        System.out.println("open output file");
+        try {
+            Desktop.getDesktop().open(outputFile);
+        } catch (FileNotFoundException|NoSuchFileException e) {
+            gui.setOutputTextAreaText(FILE_NOT_FOUND);
+        } catch (IOException e) {
+            gui.setOutputTextAreaText(ERROR + e.toString());
+            e.printStackTrace();
+        }
     }
 
     // Opens a provided file and reads lines into an ArrayList
@@ -124,6 +121,8 @@ public class FileHandler implements Constants {
 
         if (!exceptionThrown) {
             gui.setOutputTextAreaText(SCRAPE_COMPLETE + outputFile);
+            this.outputFile = new File(outputFile);
+            gui.getOpenButton().setStyle(SHOWN);
         }
     }
 }
