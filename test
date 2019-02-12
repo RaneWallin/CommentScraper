@@ -12,6 +12,7 @@ comment
 /*****************************************
 ** This is my program // Weird comment! **
 *****************************************/
+// blah blah /*
 System.out.println("Here is a //comment ");
 test
 test

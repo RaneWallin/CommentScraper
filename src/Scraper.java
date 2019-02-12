@@ -19,7 +19,6 @@ public abstract class Scraper implements Constants {
 
     public static List<String> scrapeComments(List<String> input) {
 
-
         List<String> outputString = new ArrayList<>();
         int counter = 1;
 
@@ -29,7 +28,6 @@ public abstract class Scraper implements Constants {
 
             if(comment != EMPTY_STRING)
                 outputString.add(String.format(OUTPUT_FORMAT, counter, comment));
-
 
             counter++;
         }
@@ -78,6 +76,7 @@ public abstract class Scraper implements Constants {
     // Returns the string that matches the given pattern
     private static String getComment(String patternString,String checkString) {
         String matches = EMPTY_STRING;
+        boolean isEOL = false;
 
         // create the pattern for matching
         Pattern pattern = Pattern.compile(patternString);
@@ -92,8 +91,12 @@ public abstract class Scraper implements Constants {
 
             // Handles edge case where there is a /* text */ comment followed
             // by an /* to open a multiline comment
-            if (match.matches(TRADITIONAL_START)) multilineComment = true;
-            if (match.matches(TRADITIONAL_END)) multilineComment = false;
+            if (match.matches(EOL_RANGE)) isEOL = true;
+
+            if (!isEOL) {
+                if (match.matches(TRADITIONAL_START)) multilineComment = true;
+                if (match.matches(TRADITIONAL_END)) multilineComment = false;
+            }
 
             matches += match;
         }

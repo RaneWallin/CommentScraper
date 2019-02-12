@@ -43,6 +43,7 @@ public interface Constants {
     String SOL_TO_TRADITIONAL_END = "^(.*?\\*/)";
     String FILE_DELIMITER = "\\.";
     String QUOTE_CATCHER =".*\".*";
+    String EOL_RANGE = ".*(//.*)";
 
     // patterns replaced by CATCH_ALL keeping here for reference
     //String EOL_RANGE = ".*(//.*)";
