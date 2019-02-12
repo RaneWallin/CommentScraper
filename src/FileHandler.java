@@ -63,10 +63,15 @@ public class FileHandler implements Constants {
 
     private void getInputFile() {
         String filename = gui.getInputTextFieldText();
-        List fileInput = openFile(new File(filename));
+        File file = new File(filename);
 
         // get the comments from the Scraper and send them to createOutputFile
-        createOutputFile(Scraper.scrapeComments(fileInput), filename);
+        if (file.exists()) {
+            List fileInput = openFile(file);
+            createOutputFile(Scraper.scrapeComments(fileInput), filename);
+        } else {
+            displayMessage(FILE_NOT_FOUND);
+        }
     }
 
 
@@ -75,10 +80,9 @@ public class FileHandler implements Constants {
             // Opens file using default application
             Desktop.getDesktop().open(outputFile);
         } catch (FileNotFoundException|NoSuchFileException e) {
-            gui.setOutputTextAreaText(FILE_NOT_FOUND);
+            displayMessage(FILE_NOT_FOUND);
         } catch (Exception e) {
-            gui.setOutputTextAreaText(ERROR + e.getMessage());
-            e.printStackTrace();
+            displayMessage(ERROR + e.getMessage());
         }
     }
 
@@ -91,11 +95,10 @@ public class FileHandler implements Constants {
             fileInput = Files.readAllLines(input);
         }
         catch (NoSuchFileException|FileNotFoundException e) {
-            gui.setOutputTextAreaText(FILE_NOT_FOUND);
+            displayMessage(FILE_NOT_FOUND);
         }
         catch(IOException e) {
-            gui.setOutputTextAreaText(ERROR + e.toString());
-            e.printStackTrace();
+            displayMessage(ERROR + e.getMessage());
         }
 
         return fileInput;
@@ -118,8 +121,7 @@ public class FileHandler implements Constants {
             Files.write(output, comments, Charset.forName(UNICODE));
         }
         catch(IOException e) {
-            gui.setOutputTextAreaText(ERROR + e.toString());
-            e.printStackTrace();
+            displayMessage(ERROR + e.toString());
             exceptionThrown = true;
         }
 
@@ -127,11 +129,15 @@ public class FileHandler implements Constants {
             this.outputFile = new File(outputFile);
 
             // Show success message
-            gui.setOutputTextAreaText(SCRAPE_COMPLETE + outputFile);
+            displayMessage(SCRAPE_COMPLETE + outputFile);
 
             // Show open button
             gui.getOpenButton().setStyle(SHOWN);
             gui.getOpenButton().setText(OPEN_BUTTON_TXT + outputFile);
         }
+    }
+
+    private void displayMessage(String message) {
+        gui.setOutputTextAreaText(message);
     }
 }
