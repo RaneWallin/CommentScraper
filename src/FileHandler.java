@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
@@ -41,9 +42,6 @@ public class FileHandler implements Constants {
                     case OPEN_BUTTON_TXT:
                         openOutputFile();
                         break;
-                    case CHOOSER_BUTTON_TXT:
-                        chooseFile();
-                        break;
                     case START_BUTTON_TXT:
                         getInputFile();
                         break;
@@ -55,16 +53,17 @@ public class FileHandler implements Constants {
         // add handlers to elements
         gui.getInputButton().addEventFilter(MouseEvent.MOUSE_CLICKED, buttonClick);
         gui.getOpenButton().addEventFilter(MouseEvent.MOUSE_CLICKED, buttonClick);
-        gui.getChooserButton().addEventFilter(MouseEvent.MOUSE_CLICKED, buttonClick);
 
     }
 
     private void getInputFile() {
         String filename = gui.getInputTextFieldText();
         List fileInput = openFile(new File(filename));
-        String comments = Scraper.scrapeComments(fileInput);
+        List<String> comments = Scraper.scrapeComments(fileInput);
 
-        System.out.println(comments);
+        //System.out.println(comments);
+        createOutputFile(comments, filename);
+
     }
 
     private void getInputFile(File file) {
@@ -102,5 +101,29 @@ public class FileHandler implements Constants {
         }
 
         return fileInput;
+    }
+
+    // Create an output file for the comments
+    private void createOutputFile(List<String> comments, String filename) {
+        //System.out.println(filename);
+        String tmp[] = filename.split("\\.");
+        String outputFile = tmp[0] + OUTPUT_EXTENSION;
+        boolean exceptionThrown = false;
+
+        File file = new File(outputFile);
+
+        try {
+            Path output = Paths.get(file.getPath());
+            Files.write(output, comments, Charset.forName("UTF-8"));
+        }
+        catch(IOException e) {
+            gui.setOutputTextAreaText(ERROR + e.toString());
+            e.printStackTrace();
+            exceptionThrown = true;
+        }
+
+        if (!exceptionThrown) {
+            gui.setOutputTextAreaText(SCRAPE_COMPLETE + outputFile);
+        }
     }
 }

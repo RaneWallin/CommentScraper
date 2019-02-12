@@ -25,7 +25,6 @@ public class GUI implements Constants {
 
     private Button openButton;
     private Button inputButton;
-    private Button chooserButton;
     private Label outputTextArea;
     private TextField inputField;
 
@@ -83,14 +82,12 @@ public class GUI implements Constants {
         Text inputInstructions = new Text(INPUT_INSTRUCTIONS);
         inputField = new TextField();
         inputButton = new Button(START_BUTTON_TXT);
-        chooserButton = new Button(CHOOSER_BUTTON_TXT);
 
 
         // Add components to the grid
         grid.add(inputInstructions, 1, 3);
         grid.add(inputField, 1, 4);
         grid.add(inputButton, 2, 4);
-        grid.add(chooserButton, 3, 4);
 
         // Row padding
         Text padding1 = new Text(BLANK_ROW);
@@ -160,10 +157,6 @@ public class GUI implements Constants {
 
 
     // getters
-
-    public Button getChooserButton() {
-        return chooserButton;
-    }
 
     public Button getInputButton() {
         return inputButton;

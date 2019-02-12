@@ -6,6 +6,7 @@
  *
  */
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,10 +15,10 @@ public abstract class Scraper implements Constants {
 
     private static boolean multilineComment = false;
 
-    public static String scrapeComments(List<String> input) {
+    public static List<String> scrapeComments(List<String> input) {
 
 
-        String outputString = "";
+        List<String> outputString = new ArrayList<>();
         int counter = 1;
 
         // Check each line for pattern matches
@@ -25,7 +26,7 @@ public abstract class Scraper implements Constants {
             String comment = findComment(line);
 
             if(comment != "")
-                outputString += String.format("%d. %s\n", counter, comment);
+                outputString.add(String.format("%d. %s", counter, comment));
 
 
             counter++;

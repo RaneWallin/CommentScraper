@@ -9,11 +9,12 @@ public interface Constants {
     String OUTPUT_COMPLETE_TXT = "Your new file has been created.  \nClick \"Open\" to view it.";
     String ERROR = "Something went wrong: ";
     String FILE_NOT_FOUND = "That file doesn't exist. \nPlease enter a new file name.";
-    String NO_MATCHES = "";
+    String SCRAPE_COMPLETE = "Your comments have been written to ";
+    String OUTPUT_EXTENSION = ".txt";
 
     // Button text
     String START_BUTTON_TXT = "Start";
-    String CHOOSER_BUTTON_TXT = "Find";
+    String CHOOSER_BUTTON_TXT = "...";
     String OPEN_BUTTON_TXT = "Open";
 
     // styles and formatting
