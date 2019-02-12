@@ -21,7 +21,6 @@ public class CScrape extends Application implements Constants {
 
     public void start(Stage stage) {
         GUI gui = new GUI(stage);
-        FileHandler handler = new FileHandler(gui);
     }
 
 }

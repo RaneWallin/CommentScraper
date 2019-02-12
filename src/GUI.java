@@ -32,6 +32,7 @@ public class GUI implements Constants {
 
     public GUI(Stage stage) {
         initUI(stage);
+        FileHandler handler = new FileHandler(this);
     }
 
 
