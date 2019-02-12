@@ -7,10 +7,6 @@
  * Catching multiple exceptions: https://docs.oracle.com/javase/7/docs/technotes/guides/language/catch-multiple.html
  */
 
-import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
-import javafx.event.EventHandler;
-
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -30,38 +26,10 @@ public class FileHandler implements Constants {
 
     public FileHandler(GUI gui) {
         this.gui = gui;
-
-        setListeners();
     }
 
-    // Add event listeners to buttons
-    private void setListeners() {
 
-        // create event handlers for buttons
-        EventHandler<MouseEvent> buttonClick = new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent e) {
-                String buttonText = ((Button) e.getSource()).getId();
-
-                switch(buttonText) {
-                    case OPEN_ID:
-                        openOutputFile();
-                        break;
-                    case START_ID:
-                        getInputFile();
-                        break;
-                    default:
-                }
-            }
-        };
-
-        // add handlers to buttons
-        gui.getInputButton().addEventFilter(MouseEvent.MOUSE_CLICKED, buttonClick);
-        gui.getOpenButton().addEventFilter(MouseEvent.MOUSE_CLICKED, buttonClick);
-
-    }
-
-    private void getInputFile() {
+    protected void getInputFile() {
         String filename = gui.getInputTextFieldText();
         File file = new File(filename);
 
@@ -75,7 +43,7 @@ public class FileHandler implements Constants {
     }
 
 
-    private void openOutputFile() {
+    protected void openOutputFile() {
         try {
             // Opens file using default application
             Desktop.getDesktop().open(outputFile);
@@ -128,12 +96,7 @@ public class FileHandler implements Constants {
         if (!exceptionThrown) {
             this.outputFile = new File(outputFile);
 
-            // Show success message
-            displayMessage(SCRAPE_COMPLETE + outputFile);
-
-            // Show open button
-            gui.getOpenButton().setStyle(SHOWN);
-            gui.getOpenButton().setText(OPEN_BUTTON_TXT + outputFile);
+            gui.doSuccess(outputFile);
         }
     }
 

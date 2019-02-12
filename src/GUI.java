@@ -2,18 +2,20 @@
 * Rane Wallin
 * CSC205AB
 *
-* This class is all setting up the GUI. No logic for the class assignment is here.
+* This class is all setting up the GUI and event listeners. No scraper logic here.
 *
 * References:
 * GridPane layout: https://docs.oracle.com/javase/8/javafx/layout-tutorial/builtin_layouts.htm#JFXLY102
 * GridPane layout: https://docs.oracle.com/javase/8/javafx/api/javafx/scene/layout/GridPane.html
 */
 
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -29,17 +31,19 @@ public class GUI implements Constants {
     private Button inputButton;
     private Label outputTextArea;
     private TextField inputField;
+    private FileHandler fileHandler;
 
-    public GUI(Stage stage) {
-        initUI(stage);
-        FileHandler handler = new FileHandler(this);
+    public GUI() {
+        this.fileHandler = new FileHandler(this);
     }
 
 
     // Create main GUI
-    private void initUI(Stage stage) {
+    public void initUI(Stage stage) {
         GridPane main = getGridPane();
         Scene scene = new Scene(main);
+
+        setEventHandlers();
 
         stage.setScene(scene);
         stage.setTitle(GUI_TITLE);
@@ -164,14 +168,6 @@ public class GUI implements Constants {
 
     // getters
 
-    public Button getInputButton() {
-        return inputButton;
-    }
-
-    public Button getOpenButton() {
-        return openButton;
-    }
-
     public String getInputTextFieldText() {
         return inputField.getText();
     }
@@ -179,6 +175,41 @@ public class GUI implements Constants {
     // setters
     public void setOutputTextAreaText(String string) {
         this.outputTextArea.setText(string);
+    }
+
+    public void doSuccess(String filename) {
+        // Show success message
+        setOutputTextAreaText(SCRAPE_COMPLETE + filename);
+
+        // Show open button
+        openButton.setStyle(SHOWN);
+        openButton.setText(OPEN_BUTTON_TXT + filename);
+    }
+
+    // Add event listeners to buttons
+    private void setEventHandlers() {
+
+        // create event handlers for buttons
+        EventHandler<MouseEvent> buttonClick = new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent e) {
+                String buttonText = ((Button) e.getSource()).getId();
+
+                switch(buttonText) {
+                    case OPEN_ID:
+                        fileHandler.openOutputFile();
+                        break;
+                    case START_ID:
+                        fileHandler.getInputFile();
+                        break;
+                    default:
+                }
+            }
+        };
+
+        // add handlers to buttons
+        inputButton.addEventFilter(MouseEvent.MOUSE_CLICKED, buttonClick);
+        openButton.addEventFilter(MouseEvent.MOUSE_CLICKED, buttonClick);
     }
 }
 

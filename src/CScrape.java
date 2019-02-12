@@ -20,7 +20,8 @@ public class CScrape extends Application implements Constants {
 
 
     public void start(Stage stage) {
-        GUI gui = new GUI(stage);
+        GUI gui = new GUI();
+        gui.initUI(stage);
     }
 
 }
