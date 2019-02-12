@@ -30,7 +30,7 @@ public class FileHandler implements Constants {
 
 
     protected void getInputFile() {
-        String filename = gui.getInputTextFieldText();
+        String filename = gui.getFilename();
         File file = new File(filename);
 
         // get the comments from the Scraper and send them to createOutputFile
@@ -45,7 +45,7 @@ public class FileHandler implements Constants {
 
     protected void openOutputFile() {
         try {
-            // Opens file using default application
+            // Opens file for viewing using default application
             Desktop.getDesktop().open(outputFile);
         } catch (FileNotFoundException|NoSuchFileException e) {
             displayMessage(FILE_NOT_FOUND);

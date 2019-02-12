@@ -149,8 +149,7 @@ public class GUI implements Constants {
 
 
     // getters
-
-    public String getInputTextFieldText() {
+    public String getFilename() {
         return inputField.getText();
     }
 
