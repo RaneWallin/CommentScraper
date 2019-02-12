@@ -97,6 +97,11 @@ public abstract class Scraper implements Constants {
         while(matcher.find()) {
             String match = matcher.group();
 
+            // Handle edge case where there is a /* text */ comment followed
+            // by an /* to open a multiline comment
+            if (match.matches(TRADITIONAL_START)) multilineComment = true;
+            if (match.matches(TRADITIONAL_END)) multilineComment = false;
+
             matches += match;
         }
 
