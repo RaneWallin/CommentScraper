@@ -1,14 +1,12 @@
+/*
+ * Rane Wallin
+ * CSC205AB
+ *
+ * This is the main class that launches the program.
+ *
+ */
+
 import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.*;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class CScrape extends Application implements Constants {

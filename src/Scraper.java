@@ -1,5 +1,7 @@
-/*
+/* Rane Wallin
+ * CSC205AB
  *
+ * This class is an abstract class that holds all of the comment scraper logic.
  *
  * Resources
  * RegEx: https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html

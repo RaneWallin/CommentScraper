@@ -1,4 +1,7 @@
-/*
+/* Rane Wallin
+ *
+ * This class does all of the file handling, including opening files and writing to files.
+ *
  * Resources:
  * Event handling: https://www.tutorialspoint.com/javafx/javafx_event_handling.htm
  * Catching multiple exceptions: https://docs.oracle.com/javase/7/docs/technotes/guides/language/catch-multiple.html
@@ -34,7 +37,7 @@ public class FileHandler implements Constants {
     // Add event listeners to buttons
     private void setListeners() {
 
-        // create event handlers
+        // create event handlers for buttons
         EventHandler<MouseEvent> buttonClick = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
@@ -52,7 +55,7 @@ public class FileHandler implements Constants {
             }
         };
 
-        // add handlers to elements
+        // add handlers to buttons
         gui.getInputButton().addEventFilter(MouseEvent.MOUSE_CLICKED, buttonClick);
         gui.getOpenButton().addEventFilter(MouseEvent.MOUSE_CLICKED, buttonClick);
 
@@ -61,16 +64,15 @@ public class FileHandler implements Constants {
     private void getInputFile() {
         String filename = gui.getInputTextFieldText();
         List fileInput = openFile(new File(filename));
-        List<String> comments = Scraper.scrapeComments(fileInput);
 
-        //System.out.println(comments);
-        createOutputFile(comments, filename);
-
+        // get the comments from the Scraper and send them to createOutputFile
+        createOutputFile(Scraper.scrapeComments(fileInput), filename);
     }
 
 
     private void openOutputFile() {
         try {
+            // Opens file using default application
             Desktop.getDesktop().open(outputFile);
         } catch (FileNotFoundException|NoSuchFileException e) {
             gui.setOutputTextAreaText(FILE_NOT_FOUND);
@@ -86,7 +88,6 @@ public class FileHandler implements Constants {
 
         try {
             Path input = Paths.get(file.getPath());
-
             fileInput = Files.readAllLines(input);
         }
         catch (NoSuchFileException|FileNotFoundException e) {
@@ -102,9 +103,12 @@ public class FileHandler implements Constants {
 
     // Create an output file for the comments
     private void createOutputFile(List<String> comments, String filename) {
-        //System.out.println(filename);
+        // split filename into name and extension
         String tmp[] = filename.split("\\.");
+
+        // create outputFile name (name + file extension)
         String outputFile = tmp[0] + OUTPUT_EXTENSION;
+
         boolean exceptionThrown = false;
 
         File file = new File(outputFile);
@@ -120,8 +124,12 @@ public class FileHandler implements Constants {
         }
 
         if (!exceptionThrown) {
-            gui.setOutputTextAreaText(SCRAPE_COMPLETE + outputFile);
             this.outputFile = new File(outputFile);
+
+            // Show success message
+            gui.setOutputTextAreaText(SCRAPE_COMPLETE + outputFile);
+
+            // Show open button
             gui.getOpenButton().setStyle(SHOWN);
         }
     }

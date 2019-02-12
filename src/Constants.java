@@ -1,3 +1,10 @@
+/* Rane Wallin
+ * CSC205AB
+ *
+ * This interface holds all of the constant data
+ *
+ */
+
 public interface Constants {
     // Dimensions
     int MAIN_GUI_SPACING = 25;

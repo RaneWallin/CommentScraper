@@ -1,6 +1,8 @@
 /*
+* Rane Wallin
+* CSC205AB
 *
-* This is all setting up the GUI. No assignment logic here.
+* This class is all setting up the GUI. No logic for the class assignment is here.
 *
 * References:
 * GridPane layout: https://docs.oracle.com/javase/8/javafx/layout-tutorial/builtin_layouts.htm#JFXLY102
