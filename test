@@ -2,7 +2,7 @@ test
 one
 two
 three // test comment
-four /* test comment 2 */
+four /* test comment 2 */ /* test more */
 five
 /*
 comment
@@ -12,3 +12,4 @@ comment
 /*****************************************
 ** This is my program // Weird comment! **
 *****************************************/
+System.out.println("Here is a //comment ");
