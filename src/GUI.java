@@ -168,10 +168,6 @@ public class GUI implements Constants {
         return openButton;
     }
 
-    public Label getOutputTextArea() {
-        return outputTextArea;
-    }
-
     public String getInputTextFieldText() {
         return inputField.getText();
     }

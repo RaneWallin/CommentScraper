@@ -104,7 +104,7 @@ public class FileHandler implements Constants {
     // Create an output file for the comments
     private void createOutputFile(List<String> comments, String filename) {
         // split filename into name and extension
-        String tmp[] = filename.split("\\.");
+        String tmp[] = filename.split(FILE_DELIMITER);
 
         // create outputFile name (name + file extension)
         String outputFile = tmp[0] + OUTPUT_EXTENSION;
@@ -115,7 +115,7 @@ public class FileHandler implements Constants {
 
         try {
             Path output = Paths.get(file.getPath());
-            Files.write(output, comments, Charset.forName("UTF-8"));
+            Files.write(output, comments, Charset.forName(UNICODE));
         }
         catch(IOException e) {
             gui.setOutputTextAreaText(ERROR + e.toString());

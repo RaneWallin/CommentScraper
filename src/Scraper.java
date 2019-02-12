@@ -27,8 +27,8 @@ public abstract class Scraper implements Constants {
         for(String line: input) {
             String comment = findComment(line);
 
-            if(comment != "")
-                outputString.add(String.format("%d. %s", counter, comment));
+            if(comment != EMPTY_STRING)
+                outputString.add(String.format(OUTPUT_FORMAT, counter, comment));
 
 
             counter++;
@@ -38,7 +38,7 @@ public abstract class Scraper implements Constants {
     }
 
     private static String findComment(String text) {
-        String comment = "";
+        String comment = EMPTY_STRING;
 
         if (multilineComment) {
 
@@ -76,7 +76,7 @@ public abstract class Scraper implements Constants {
     // Searches for a match based on a provided pattern and string to check
     private static boolean hasMatch(String patternString, String checkString) {
         //don't match pattern if it is inside quotes
-        String falseMatch = ".*\".*"+patternString+".*\".*";
+        String falseMatch = QUOTE_CATCHER+patternString+QUOTE_CATCHER;
 
         return checkString.matches(patternString) && !checkString.matches(falseMatch);
 
@@ -84,7 +84,7 @@ public abstract class Scraper implements Constants {
 
     // Returns the string that matches the given pattern
     private static String getComment(String patternString,String checkString) {
-        String matches = "";
+        String matches = EMPTY_STRING;
 
         // create the pattern for matching
         Pattern pattern = Pattern.compile(patternString);
@@ -101,11 +101,6 @@ public abstract class Scraper implements Constants {
         }
 
         return matches;
-    }
-
-    // Formats output to print to a file
-    private static String getOutput(String text, int lineNum) {
-        return String.format("%d. %s\n", lineNum, text);
     }
 
 }

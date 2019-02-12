@@ -6,9 +6,6 @@
  */
 
 public interface Constants {
-    // Dimensions
-    int MAIN_GUI_SPACING = 25;
-
 
     // Strings
     String GUI_TITLE = "CScrape: Comment Scraper";
@@ -21,7 +18,6 @@ public interface Constants {
 
     // Button text
     String START_BUTTON_TXT = "Start";
-    String CHOOSER_BUTTON_TXT = "...";
     String OPEN_BUTTON_TXT = "Open";
 
     // styles and formatting
@@ -32,8 +28,10 @@ public interface Constants {
     String HIDDEN = "-fx-opacity: 0";
     String SHOWN = "-fx-opacity: 1";
     String DEFAULT_FONT = "Arial";
+    String UNICODE = "UTF-8";
+    String OUTPUT_FORMAT = "%d. %s";
+    String EMPTY_STRING = "";
     String BLANK_ROW = "";
-    String BLANK_COLUMN = BLANK_ROW;
 
     // RegEx patterns
     String COMMENT_STARTS = ".*(//|/\\*).*";
@@ -41,7 +39,8 @@ public interface Constants {
     String TRADITIONAL_END = ".*(\\*/).*";
     String CATCH_ALL = "(//|/\\*)(.*?)(\\*/|\\Z)";
     String SOL_TO_TRADITIONAL_END = "^(.*?\\*/)";
-    String FALSE_ALARM = "\"(//|/\\*)(.*?)(\\*/|\\Z)\"";
+    String FILE_DELIMITER = "\\.";
+    String QUOTE_CATCHER =".*\".*";
 
     // patterns replaced by CATCH_ALL keeping here for reference
     //String EOL_RANGE = ".*(//.*)";
