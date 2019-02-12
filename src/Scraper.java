@@ -45,8 +45,6 @@ public abstract class Scraper implements Constants {
             // Check if matches a multiline end
             if(hasMatch(TRADITIONAL_END, text)) {
 
-                multilineComment = false;
-
                 // Add comment from start of line to ending comment
                 comment = getComment(SOL_TO_TRADITIONAL_END, text);
 
@@ -60,11 +58,6 @@ public abstract class Scraper implements Constants {
 
             // Check if matches any type of comment
             if (hasMatch(COMMENT_STARTS, text)) {
-
-                // check if match is /* and doesn't have an ending */ and go into multiline mode
-                // if so
-                if (hasMatch(TRADITIONAL_START, text)&&
-                        !hasMatch(TRADITIONAL_END, text)) multilineComment = true;
 
                 comment = getComment(CATCH_ALL, text);
             }
@@ -97,7 +90,7 @@ public abstract class Scraper implements Constants {
         while(matcher.find()) {
             String match = matcher.group();
 
-            // Handle edge case where there is a /* text */ comment followed
+            // Handles edge case where there is a /* text */ comment followed
             // by an /* to open a multiline comment
             if (match.matches(TRADITIONAL_START)) multilineComment = true;
             if (match.matches(TRADITIONAL_END)) multilineComment = false;
