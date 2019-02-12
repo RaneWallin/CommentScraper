@@ -16,9 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -108,34 +106,18 @@ public class GUI implements Constants {
         // Create output components
         this.outputTextArea = new Label();
         openButton = new Button(OPEN_BUTTON_TXT);
-        Label outputCompleteText = new Label(OUTPUT_COMPLETE_TXT);
-        AnchorPane outputArea= new AnchorPane(outputTextArea, openButton, outputCompleteText);
+        VBox outputArea= new VBox(outputTextArea, openButton);
 
 
         // Styles
         outputArea.setStyle(GRAY_BG + BLACK_BORDER + PADDING5PX);
-        outputArea.setMinHeight(150);
+        outputArea.setMinHeight(100);
+        outputArea.setSpacing(25);
         outputTextArea.setWrapText(true);
-        outputCompleteText.setWrapText(true);
         openButton.setId(OPEN_ID);
 
         // Hide completion text and button
         openButton.setStyle(HIDDEN);
-        outputCompleteText.setStyle(HIDDEN);
-
-        // Position outputTextArea on AnchorPane
-        AnchorPane.setTopAnchor(outputTextArea, 10.0);
-        AnchorPane.setLeftAnchor(outputTextArea, 10.0);
-        AnchorPane.setRightAnchor(outputTextArea, 10.0);
-        AnchorPane.setBottomAnchor(outputTextArea, 80.0);
-
-        // Position openBtn on AnchorPane
-        AnchorPane.setBottomAnchor(openButton, 5.0);
-        AnchorPane.setLeftAnchor(openButton, 10.0);
-
-        // Position outputCompleteText on AnchorPane
-        AnchorPane.setBottomAnchor(outputCompleteText, 20.0);
-        AnchorPane.setLeftAnchor(outputCompleteText, 10.0);
 
         // Add outputArea to grid
         grid.add(outputArea, 6, 3, 4, 6);
@@ -186,6 +168,11 @@ public class GUI implements Constants {
         openButton.setText(OPEN_BUTTON_TXT + filename);
     }
 
+    public void hideOpen() {
+        openButton.setStyle(HIDDEN);
+        setOutputTextAreaText("");
+    }
+
     // Add event listeners to buttons
     private void setEventHandlers() {
 
@@ -200,6 +187,7 @@ public class GUI implements Constants {
                         fileHandler.openOutputFile();
                         break;
                     case START_ID:
+                        hideOpen();
                         fileHandler.getInputFile();
                         break;
                     default:
