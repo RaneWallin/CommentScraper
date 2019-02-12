@@ -117,7 +117,7 @@ public class GUI implements Constants {
         openButton.setId(OPEN_ID);
 
         // Hide completion text and button
-        openButton.setStyle(HIDDEN);
+        hideOpen();
 
         // Add outputArea to grid
         grid.add(outputArea, 6, 3, 4, 6);
